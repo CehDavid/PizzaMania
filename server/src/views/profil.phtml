@@ -1,0 +1,36 @@
+<?php if(!$params['isAuthorized']):?>
+<?php if ($params['info'] === "invalidCredentials") : ?>
+    <div class="alert alert-danger">
+        Helytelen bejelentkezési adatok
+    </div>
+<?php endif ?>   
+<form class="form-login p-2" id="form-login" action='/login' method="POST">
+    <h2 class="text-light">Bejelentkezés</h2>
+    <div class="form-group mt-3 mb-2">
+        <input type="user" class="form-control" name="user" aria-describedby="user"placeholder="Felhasználónév">
+    </div>
+    <div class="form-group mt-4">
+        <input type="password" class="form-control" name="psw" placeholder="Jelszó">
+    </div>
+    <button type="submit" class="btn btn-success my-3" id="login" name="login">Bejelentkezés</button>
+    <p class="text-light">Ha nincs még felhasználó fiókod <a href="/register">katt ide!!!</a>
+</form>
+<?php else:?>
+<div class="card p-2 mt-2 mb-5">
+    <div class="card-header"> 
+        <form action="/logout" method="GET">
+            <div class="row">
+                <div class="col mt-1">
+                    <span class="bg-primary border border-light text-dark p-2">
+                        <?=$params['user']?>
+                        <a href="/profil"><img src="public/img/Smiley.png" alt=""></img></a> 
+                    </span>
+                </div>               
+                <div class="col">
+                    <button class ="btn btn-danger float-end" type="submit">Kijelntkezés</button>
+                </div> 
+            </div>                  
+        </form>
+    </div>
+</div>
+<?php endif?>

@@ -1,0 +1,60 @@
+body {
+    
+    font-family: "Gill Sans", Sans-Serif;
+    background-image:url("./public/img/bg.jpg");
+      
+}
+.offcanvas-body{
+    background-color: #333132;
+}
+.card {
+  background-color: #333132;
+  color: white;
+}
+.card-header {
+  background-color: #333132;
+  color: white;
+}
+.card-body {
+  background-color:#333132 ;
+  color: white;
+}
+.table{
+  background-color: #E6B9B9;
+  color: black;
+}
+
+.nav-link {
+    background-color: #333132;
+    text-transform: uppercase;
+    color: white;
+}
+.nav-link:hover {
+
+  color: firebrick;
+}
+
+.tab-content{
+     background-color:#333132; 
+      color: white;
+}
+#navLink{
+  text-transform: uppercase;
+  color: white;
+  background-color: #333132;
+}
+#navLink:hover {
+
+  border-radius: 0%;
+  color: firebrick;
+  border-bottom: 3px solid firebrick;
+  bottom: -2px;
+
+}
+#navLink::active{
+
+  border-radius: 0%;
+  color: firebrick;
+  border-bottom: 3px solid firebrick;
+  bottom: -2px;
+}

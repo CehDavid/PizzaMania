@@ -1,0 +1,106 @@
+<?php 
+    $total = 0;
+?>
+<?php if(isset($_SESSION['cart']) && sizeof($_SESSION['cart'])>0):?>     
+<div class="card mt-2 p-2 text-white">
+    <div class="card-header">
+        <h4 class="card-title text-white">Kosár:<img class="float-end" src="public/img/Cart-icon.png" alt=""></h4>
+    </div>  
+    <div class="card-body">
+        <table class="table table-sm rounded">
+            <thead>
+                <tr>
+                    <th scope="col">Termék</th>
+                    <th scope="col">ár</th>
+                    <th scope="col">Törlés</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($_SESSION['cart'] as $key => $value):?>
+                <?php $total = $total + $value['price']?>
+                <tr>
+                    <td><?=$value['name']?></td>
+                    <td><?=$value['price']?> Ft</td>
+                    <form action="/remove-from-cart" method="POST">
+                        <td>
+                            <button type="submit" class="btn btn-sm">
+                                <img src="public/img/cancel.png" alt="">
+                            </button>
+                        </td>
+                    <input type="hidden" name="name" value="<?=$value['name']?>">
+                    </form>
+                </tr>
+            <?php endforeach?>            
+            </tbody>
+        </table>
+    </div>
+    <div calss ="card-footer">
+        <p class ="m-2 p-1">Összese: <?=$total?> ft</p>
+    </div>
+</div>
+<?php else:?>
+    <div class='alert alert-danger'>
+      Üres a kosarad          
+    </div>
+<?php endif?>  
+<div class="card mt-2 p-2">
+        <div class="card-header text-center ">
+           <h3 class="text-white">
+              <strong>Vevő adatai:</strong>  
+           </h3> 
+        </div>
+        <div class="card-body">
+            <p>Teljes Név: <?=$params['user']['lastName']?> <?=$params['user']['firstName']?></p>
+            <p>Telefonszám: <?=$params['user']['phone']?></p>
+        </div>
+    </div>
+    <div class="card mt-2 p-2">
+        <div class="card-header text-center ">
+           <h3 class="text-white">
+           <strong>Kiszállítási cím:</strong>
+           </h3>   
+        </div>
+        <form method="POST" action="/submit-order">
+        <div class="card-body">
+            <?php foreach($params['addresses'] as $address):?>
+            <div class="form-check form-check-inline m-2 p-1">
+                <input type="radio" class="form-check-input" name="addressId" id="<?=$address['id']?>" value="<?=$address['id']?>" >
+                <label class="form-check-label" for="<?=$address['id']?>"><?=$address['address']?> <?=$address['info']?></label>
+            </div>
+            <br>
+            <?php endforeach?>
+            <?php if($params['info']==='noAddress'): ?>
+                <div class='text-danger p-2'>
+                    Válaszd ki a megfelelő címet!
+                </div>
+            <?php endif ?> 
+            <div class="d-flex justify-content-end">
+                <a href="/new-address" class="btn btn-warning mb-3">Cím hozzáadás</a>      
+            </div>          
+        </div>
+        <div class="card-footer text-white">
+        <div class="form-group">
+            <label class="m-1 p-1">Megjegyzés:</label>
+            <textarea class="form-control" name="comment" rows="3"></textarea>
+        </div>
+            <strong>Fizetésimód:</strong>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="paymentOptions" id="inlineRadio1" value="0">
+                <label class="form-check-label" for="inlineRadio1">Készpénz</label>
+            </div>
+            <div class="form-check form-check-inline mx-2 p-1">
+                <input class="form-check-input" type="radio" name="paymentOptions" id="inlineRadio2" value="1">
+                <label class="form-check-label" for="inlineRadio2">Bankártya</label>
+            </div>
+            <?php if($params['info']==='noPaymentOption'): ?>
+                <div class='text-danger p-2'>
+                    Válaszd ki a fizetésimódot!
+                </div>
+            <?php endif ?>   
+            <div class="d-grid">
+            <button class="btn btn-success btn-block">Küldés</button>
+            </form>
+            </div>   
+        </div>
+    </div>
+ 

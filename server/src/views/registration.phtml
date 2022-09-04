@@ -1,0 +1,81 @@
+
+<?php if ($params['info'] === "registrationSuccessful") : ?>
+
+<div class="alert alert-success">
+    Sikeres regisztráció
+</div>
+<?php endif ?>
+
+<?php
+$isValidClass = function ($key) use ($params) {
+  if (!$params['errorMessages']) {
+    return "";
+  }
+  return count($params['errorMessages'][$key] ?? []) ? "is-invalid" : "is-valid";
+};
+?>
+
+<form class="form-login" action="/registration" method="POST">
+    <h2 class="text-light">Regisztráció</h2>
+  <div class="form-row">
+    <div class="form-group col-md-6 mb-4">
+      <input type="user" name="user" value="<?= $params['values']['user'] ?? '' ?>" class="form-control <?= $isValidClass('user') ?>" placeholder="Felhasználónév">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['user'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>
+    </div>
+    <div class="form-group col-md-6 mb-4">
+      <input type="password" name="password" value="<?= $params['values']['password'] ?? '' ?>" class="form-control <?= $isValidClass('password') ?>" placeholder="Jelszó">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['password'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>       
+    </div>
+    <div class="form-group col-md-6 mb-4">
+      <input type="password" name="repeatedPass" value="<?= $params['values']['repeatedPass'] ?? '' ?>" class="form-control <?= $isValidClass('repeatedPass') ?>" placeholder="Jelszó újra">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['repeatedPass'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>       
+    </div>
+    <div class="form-group col-md-6 mb-4">
+      <input type="email" name="email" value="<?= $params['values']['email'] ?? '' ?>" class="form-control <?= $isValidClass('email') ?>" placeholder="e-mail cím">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['email'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>       
+    </div>
+    <div class="form-group col-md-6 mb-4">
+      <input type="text" name="phone" value="<?= $params['values']['phone'] ?? '' ?>" class="form-control <?= $isValidClass('phone') ?>" placeholder="Telefonszám">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['phone'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>
+    </div> 
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 mb-4">
+      <input type="text"  name="lastName" value="<?= $params['values']['lastName'] ?? '' ?>" class="form-control <?= $isValidClass('lastName') ?>" placeholder="Vezetéknév">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['lastName'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>
+    </div> 
+    <div class="form-group col-md-6 mb-4">
+      <input type="text" name="firstName" value="<?= $params['values']['firstName'] ?? '' ?>" class="form-control <?= $isValidClass('firstName') ?>" placeholder="Keresztnév">
+      <div class="invalid-feedback">
+            <?php foreach ($params['errorMessages']['firstName'] as $error) : ?>
+              <?= $error ?> <br />
+            <?php endforeach; ?>
+      </div>
+    </div> 
+  </div>
+  <button type="submit" class="btn btn-dark mt-3 p-2">Regisztráció</button>
+</form>

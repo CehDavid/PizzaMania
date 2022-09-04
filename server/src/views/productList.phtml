@@ -1,0 +1,42 @@
+
+<ul class="nav nav-pills" style="background-color: #333132" role="tablist">
+    <?php foreach($params['productTypes'] as $type):?>
+    <li class="nav-item m-2">
+        <a class="nav-link <?=$type['type'] === "Pizzák" ? "active" :""?>" id="navLink" data-bs-toggle="pill" href="#<?=$type['type']?>"><?=$type['type']?></a>
+    </li>
+    <?php endforeach?>
+</ul>
+<div class="tab-content" >
+<?php foreach($params['productTypes'] as $type):?>
+    <div id="<?=$type['type']?>" class="container tab-pane <?=$type['type'] === "Pizzák" ? "active" :""?>"><br>
+       <?php foreach($type['products'] as $product): ?>
+        <div class="row m-2 p-2 rounded text-dark" style="background-color:#E6B9B9">
+            <h4 class="m-2">
+            <?= $product['name']?>
+            </h4>
+            <div class="col-sm-2 me-5 p-2">
+                <img src="<?=$type['img']?>" alt=""> 
+            </div>
+            <div class="col-sm-4 mt-2 p-4">
+                <h5>Leírás:</h5>
+                <?= $product['discription']?>
+            </div>
+            <div class="col-sm-4">
+            <div class="col-sm-8 m-4 p-2">
+                <strong>Ár: <?=$product['price']?> Ft</strong> 
+                <div class="d-dgrid">
+                <form method="POST" action="/add-to-cart">
+                    <button type="submit" name="add" class="btn btn-warning mt-2 d-block"> Hozzáad</button>
+                    <input type="hidden" name="id" value="<?=$product['id']?>">
+                    <input type="hidden" name="name" value="<?=$product['name']?>">
+                    <input type="hidden" name="price" value="<?=$product['price']?>">
+                </form>
+                </div>
+            </div>
+            </div>   
+        </div>
+        <hr>    
+        <?php endforeach?>
+    </div>   
+<?php endforeach?>    
+</div>

@@ -1,0 +1,20 @@
+<div class="card p-5 " style="background-color: #333132">
+    <div class="text-center">
+        <?php if($params['weAre']==='open'): ?>
+        <h1 class="text-success"> Nyitva vagyunk!</h1>
+        <h2>10:00 - 22:00</h2>
+        <h3>HÉFŐTŐL-VASÁRNAPIG MINDEN NAP</h3>
+        <h5>Gyere be a 4031 Debrecen Derék utca 15 szám alatt lévő étermünkbe
+            és kostold meg a legújabb finomságokat <br> 
+            Rendlej akár most telefonon a +36705545345-ös telefonszámon,
+            Vagy online a weboldalunkon: 
+            <p><a class="text-warning" href="/"> katt az étlapra.</a></p> 
+        </h5>
+        <?php endif?>
+        <?php if($params['weAre']==='close'): ?>
+        <h1 class="text-danger">Jelenleg zárva vagyunk!</h1>
+        <h2>De 10:00 - 22:00 között újra nyítva áll az ajtonk előtted</h2>
+        <h3>MINDEN NAP HÉFŐTŐL-VASÁRNAPIG</h3>
+        <?php endif?>
+    </div>
+</div>

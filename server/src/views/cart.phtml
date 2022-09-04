@@ -1,0 +1,44 @@
+<?php  
+    $total = 0;
+?>
+<?php if(isset($_SESSION['cart']) && sizeof($_SESSION['cart'])>0):?>
+<div class="card mt-2 p-2" style="background-color: #333132">
+    <div class="card-header"  style="background-color: #333132">
+        <h4 class="card-title text-white">Kosár:<img class="float-end" src="public/img/Cart-icon.png" alt=""></h4>
+    </div>  
+    <div class="card-body">
+        <table class="table table-sm rounded" >
+            <thead>
+                <tr>
+                    <th scope="col">Termék</th>
+                    <th scope="col">ár</th>
+                    <th scope="col">Törlés</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($_SESSION['cart'] as $key => $value):?>
+                <?php $total = $total + $value['price']?>
+                <tr>
+                    <td><?=$value['name']?></td>
+                    <td><?=$value['price']?> Ft</td>
+                    <form action="/remove-from-cart" method="POST">
+                        <td>
+                            <button type="submit" class="btn btn-sm">
+                                <img src="public/img/cancel.png" alt="">
+                            </button>
+                        </td>
+                    <input type="hidden" name="name" value="<?=$value['name']?>">
+                    </form>
+                </tr>
+            <?php endforeach?>            
+            </tbody>
+        </table>
+    </div>
+    <div calss ="card-footer">
+        <p class ="mt-2 text-white">Összese: <?=$total?> ft</p>
+        <div class="d-grid">
+            <a href="/order" class="btn btn-success btn-block">Tovább</a>
+        </div>
+    </div>
+</div>
+<?php endif?>  
